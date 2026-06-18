@@ -29,6 +29,8 @@ dependencies:
 
   # HTTP
   http: ^1.1.0
+  supabase_flutter: ^2.15.0
+  flutter_dotenv: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -41,3 +43,4 @@ flutter:
 
   assets:
     - assets/images/
+    - .env

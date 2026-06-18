@@ -32,17 +32,37 @@ final sl = GetIt.instance;
 Future<void> initDependencies() async {
   sl.registerLazySingleton<AuthClient>(() => AuthClientStub());
 
-  sl.registerLazySingleton<EmailAuthDataSource>(() => EmailAuthDataSourceImpl(sl()));
-  sl.registerLazySingleton<SocialAuthDataSource>(() => SocialAuthDataSourceImpl(sl()));
-  sl.registerLazySingleton<PhoneAuthDataSource>(() => PhoneAuthDataSourceImpl(sl()));
-  sl.registerLazySingleton<SessionDataSource>(() => SessionDataSourceImpl(sl()));
-  sl.registerLazySingleton<ProfileDataSource>(() => ProfileDataSourceImpl(sl()));
+  sl.registerLazySingleton<EmailAuthDataSource>(
+    () => EmailAuthDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<SocialAuthDataSource>(
+    () => SocialAuthDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<PhoneAuthDataSource>(
+    () => PhoneAuthDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<SessionDataSource>(
+    () => SessionDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<ProfileDataSource>(
+    () => ProfileDataSourceImpl(sl()),
+  );
 
-  sl.registerLazySingleton<EmailAuthRepository>(() => EmailAuthRepositoryImpl(emailAuthDataSource: sl()));
-  sl.registerLazySingleton<SocialAuthRepository>(() => SocialAuthRepositoryImpl(socialAuthDataSource: sl()));
-  sl.registerLazySingleton<PhoneAuthRepository>(() => PhoneAuthRepositoryImpl(phoneAuthDataSource: sl()));
-  sl.registerLazySingleton<SessionRepository>(() => SessionRepositoryImpl(sessionDataSource: sl()));
-  sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(profileDataSource: sl()));
+  sl.registerLazySingleton<EmailAuthRepository>(
+    () => EmailAuthRepositoryImpl(emailAuthDataSource: sl()),
+  );
+  sl.registerLazySingleton<SocialAuthRepository>(
+    () => SocialAuthRepositoryImpl(socialAuthDataSource: sl()),
+  );
+  sl.registerLazySingleton<PhoneAuthRepository>(
+    () => PhoneAuthRepositoryImpl(phoneAuthDataSource: sl()),
+  );
+  sl.registerLazySingleton<SessionRepository>(
+    () => SessionRepositoryImpl(sessionDataSource: sl()),
+  );
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(profileDataSource: sl()),
+  );
 
   sl.registerFactory(() => EmailAuthBloc(emailAuthRepository: sl()));
   sl.registerFactory(() => SocialAuthBloc(socialAuthRepository: sl()));

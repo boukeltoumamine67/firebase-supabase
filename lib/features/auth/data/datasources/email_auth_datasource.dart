@@ -14,7 +14,11 @@ abstract class EmailAuthDataSource {
 
   Future<void> resetPassword({required String email});
 
-  Future<void> verifyEmail({required String token});
+  Future<UserModel> verifyPasswordResetOtp({
+    required String otp,
+    required String email,
+  });
+  Future<void> updatePassword({String password});
 
   Future<void> sendMagicLink({required String email});
 }

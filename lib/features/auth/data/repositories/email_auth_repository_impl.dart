@@ -70,9 +70,32 @@ class EmailAuthRepositoryImpl implements EmailAuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> verifyEmail({required String token}) async {
+  Future<Either<Failure, UserEntity>> verifyPasswordResetOtp({
+    required String email,
+    required String token,
+  }) async {
     try {
-      await _emailAuthDataSource.verifyEmail(token: token);
+      final response = await _emailAuthDataSource.verifyPasswordResetOtp(
+        otp: token,
+        email: email,
+      );
+      return Right(response);
+    } on AuthException catch (e) {
+      return Left(AuthFailure(e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } catch (e) {
+      return Left(ServerFailure('Unexpected error: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updatePassword({
+    required String password,
+  }) async {
+    try {
+      await _emailAuthDataSource.updatePassword(password: password);
+
       return const Right(null);
     } on AuthException catch (e) {
       return Left(AuthFailure(e.message));

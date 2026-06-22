@@ -52,8 +52,7 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   @override
   Future<void> resetPassword({required String email}) async {
     try {
-      final response= _authClient.resetPasswordForEmail(email: email);
-      print(response.)
+      _authClient.resetPasswordForEmail(email: email);
       // TODO: Implement resetPassword
       throw UnimplementedError('resetPassword not implemented yet');
     } on AuthException {
@@ -64,9 +63,30 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   }
 
   @override
-  Future<void> verifyEmail({required String token}) async {
+  Future<UserModel> verifyPasswordResetOtp({
+    required String otp,
+    required String email,
+  }) async {
     try {
-      // TODO: Implement verifyEmail
+      final response = await _authClient.verifyPasswordResetOtp(
+        otp: otp,
+        email: email,
+      );
+      if (response.user == null) {
+        AuthException('verify OTP failed - invalidate OTP or expired');
+      }
+      throw UnimplementedError('verifyEmail not implemented yet');
+    } on AuthException {
+      rethrow;
+    } catch (e) {
+      throw ServerException('Failed to verify email: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<void> updatePassword(String password) async {
+    try {
+      await _authClient.updatePassword(password: password);
       throw UnimplementedError('verifyEmail not implemented yet');
     } on AuthException {
       rethrow;

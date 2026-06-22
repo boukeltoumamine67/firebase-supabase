@@ -30,7 +30,10 @@ class AuthClientImpl implements AuthClient {
   }
 
   @override
-  Future<AuthResponse> verifyPasswordResetOtp(String email, String otp) async {
+  Future<AuthResponse> verifyPasswordResetOtp({
+    required String email,
+    required String otp,
+  }) async {
     return await client.verifyOTP(
       type: OtpType.recovery,
       email: email,
@@ -39,7 +42,7 @@ class AuthClientImpl implements AuthClient {
   }
 
   @override
-  Future<UserResponse> updatePassword(String password) async {
+  Future<UserResponse> updatePassword({required String password}) async {
     return await client.updateUser(UserAttributes(password: password));
   }
 }

@@ -11,6 +11,9 @@ abstract class AuthClient {
   });
   Future<AuthResponse> signIn(String email, String password);
   Future<void> resetPasswordForEmail({required String email});
-  Future<AuthResponse> verifyPasswordResetOtp(String email, String otp);
-  Future<UserResponse> updatePassword(String password);
+  Future<AuthResponse> verifyPasswordResetOtp({
+    required String email,
+    required String otp,
+  });
+  Future<void> updatePassword({required String password});
 }

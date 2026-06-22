@@ -1,5 +1,5 @@
 import 'package:auth_flow_app/core/error/exceptions.dart';
-import 'package:auth_flow_app/features/auth/data/datasources/auth_client.dart';
+import 'package:auth_flow_app/core/network/supabase/auth_client.dart';
 import 'package:auth_flow_app/features/auth/data/datasources/email_auth_datasource.dart';
 import 'package:auth_flow_app/features/auth/data/models/user_model.dart';
 
@@ -12,10 +12,18 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   Future<UserModel> signUpWithEmail({
     required String email,
     required String password,
+    required String name,
   }) async {
     try {
-      // TODO: Implement signUpWithEmail
-      throw UnimplementedError('signUpWithEmail not implemented yet');
+      final response = await _authClient.signUp(
+        email: email,
+        password: password,
+        name: name,
+      );
+      if (response.user == null) {
+        AuthException('SignUp failed');
+      }
+      return UserModel.fromSupabaseSdk(response.user!);
     } on AuthException {
       rethrow;
     } catch (e) {
@@ -29,8 +37,11 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
     required String password,
   }) async {
     try {
-      // TODO: Implement signInWithEmail
-      throw UnimplementedError('signInWithEmail not implemented yet');
+      final response = await _authClient.signIn(email, password);
+      if (response.user == null) {
+        AuthException('SignIn operation failed');
+      }
+      return UserModel.fromSupabaseSdk(response.user!);
     } on AuthException {
       rethrow;
     } catch (e) {
@@ -41,6 +52,8 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   @override
   Future<void> resetPassword({required String email}) async {
     try {
+      final response= _authClient.resetPasswordForEmail(email: email);
+      print(response.)
       // TODO: Implement resetPassword
       throw UnimplementedError('resetPassword not implemented yet');
     } on AuthException {

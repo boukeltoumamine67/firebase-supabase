@@ -14,10 +14,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
   await dotenv.load();
+
   await Supabase.initialize(
     url: dotenv.get('SUPABASE_URL'),
     publishableKey: dotenv.get('SUPABASE_KEY'),
   );
+
+  /*final response = await Supabase.instance.client.auth.signInWithPassword(
+    email: 'boukeltoumamine67@gmail.com',
+    password: '1234567',
+  );
+  print(response.user);*/
+
   runApp(const MyApp());
 }
 

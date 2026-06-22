@@ -28,6 +28,7 @@ class _SignupViewState extends State<SignupView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   @override
@@ -93,6 +94,21 @@ class _SignupViewState extends State<SignupView> {
                       return null;
                     },
                   ),
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Name',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                  ),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: _passwordController,
@@ -139,6 +155,7 @@ class _SignupViewState extends State<SignupView> {
                           SignUpWithEmailEvent(
                             email: _emailController.text.trim(),
                             password: _passwordController.text,
+                            name: _nameController.text,
                           ),
                         );
                       }

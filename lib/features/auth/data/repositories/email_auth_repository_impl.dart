@@ -1,27 +1,29 @@
-import 'package:dartz/dartz.dart';
 import 'package:auth_flow_app/core/error/exceptions.dart';
 import 'package:auth_flow_app/core/error/failures.dart';
 import 'package:auth_flow_app/features/auth/data/datasources/email_auth_datasource.dart';
 import 'package:auth_flow_app/features/auth/domain/entities/user_entity.dart';
 import 'package:auth_flow_app/features/auth/domain/repositories/email_auth_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class EmailAuthRepositoryImpl implements EmailAuthRepository {
   final EmailAuthDataSource _emailAuthDataSource;
 
-  EmailAuthRepositoryImpl({
-    required EmailAuthDataSource emailAuthDataSource,
-  }) : _emailAuthDataSource = emailAuthDataSource;
+  EmailAuthRepositoryImpl({required EmailAuthDataSource emailAuthDataSource})
+    : _emailAuthDataSource = emailAuthDataSource;
 
   @override
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
     required String password,
+    required String name,
   }) async {
     try {
       final user = await _emailAuthDataSource.signUpWithEmail(
         email: email,
         password: password,
+        name: name,
       );
+      //print(user);
       return Right(user);
     } on AuthException catch (e) {
       return Left(AuthFailure(e.message));
@@ -42,6 +44,7 @@ class EmailAuthRepositoryImpl implements EmailAuthRepository {
         email: email,
         password: password,
       );
+      //print(user);
       return Right(user);
     } on AuthException catch (e) {
       return Left(AuthFailure(e.message));

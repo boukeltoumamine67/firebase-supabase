@@ -18,7 +18,7 @@ abstract class EmailAuthDataSource {
     required String otp,
     required String email,
   });
-  Future<void> updatePassword({String password});
+  Future<void> updatePassword({required String password});
 
   Future<void> sendMagicLink({required String email});
 }

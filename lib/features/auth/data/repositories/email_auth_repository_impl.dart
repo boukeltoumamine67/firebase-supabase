@@ -10,7 +10,6 @@ class EmailAuthRepositoryImpl implements EmailAuthRepository {
 
   EmailAuthRepositoryImpl({required EmailAuthDataSource emailAuthDataSource})
     : _emailAuthDataSource = emailAuthDataSource;
-
   @override
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,

@@ -32,13 +32,30 @@ class SignInWithEmailEvent extends EmailAuthEvent {
   List<Object?> get props => [email, password];
 }
 
-class ResetPasswordEvent extends EmailAuthEvent {
+class SendPasswordResetOtpEvent extends EmailAuthEvent {
   final String email;
 
-  const ResetPasswordEvent({required this.email});
+  const SendPasswordResetOtpEvent({required this.email});
 
   @override
   List<Object?> get props => [email];
+}
+
+class VerifyPasswordSentOtpEvent extends EmailAuthEvent {
+  final String email;
+  final String otp;
+
+  const VerifyPasswordSentOtpEvent({required this.email, required this.otp});
+
+  @override
+  List<Object?> get props => [email, otp];
+}
+
+class UpdatePasswordEvent extends EmailAuthEvent {
+  final String password;
+  const UpdatePasswordEvent({required this.password});
+  @override
+  List<Object?> get props => [password];
 }
 
 class SendMagicLinkEvent extends EmailAuthEvent {

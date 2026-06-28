@@ -84,7 +84,7 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   }
 
   @override
-  Future<void> updatePassword(String password) async {
+  Future<void> updatePassword({required String password}) async {
     try {
       await _authClient.updatePassword(password: password);
       throw UnimplementedError('verifyEmail not implemented yet');

@@ -46,9 +46,9 @@ class PasswordResetOtpSent extends EmailAuthState {
 
 class PasswordResetOtpVerify extends EmailAuthState {}
 
-class passwordUpdated extends EmailAuthState {
-  final String password;
-  const passwordUpdated({required this.password});
+class PasswordUpdated extends EmailAuthState {
+  final String message;
+  const PasswordUpdated({required this.message});
   @override
-  List<Object?> get props => [password];
+  List<Object?> get props => [message];
 }

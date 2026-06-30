@@ -54,7 +54,7 @@ class _SignupViewState extends State<SignupView> {
             );
           } else if (state is EmailAuthSuccess) {
             Navigator.of(context).pushReplacementNamed('/home');
-          } else if (state is EmailSent) {
+          } else if (state is PasswordResetOtpSent) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),

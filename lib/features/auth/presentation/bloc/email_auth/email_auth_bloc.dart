@@ -104,7 +104,7 @@ class EmailAuthBloc extends Bloc<EmailAuthEvent, EmailAuthState> {
         emit(EmailAuthError(message: left.message));
       },
       (right) {
-        emit(passwordUpdated(password: event.password));
+        emit(PasswordUpdated(message: 'password updated succesfully'));
       },
     );
   }
